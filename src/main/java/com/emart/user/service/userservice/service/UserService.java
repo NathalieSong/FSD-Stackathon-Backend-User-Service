@@ -16,6 +16,7 @@ import com.emart.user.service.userservice.vo.SellerResponse;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -81,6 +82,8 @@ public class UserService {
     private Buyer toBuyer(BuyerRequest buyerReq) {
         Buyer buyer = new Buyer();
         BeanUtils.copyProperties(buyerReq, buyer);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        buyer.setPassword(encoder.encode(buyer.getPassword()));
         buyer.setCreatedDate(new Date());
         buyer.setActive(true);
         return buyer;
@@ -95,6 +98,8 @@ public class UserService {
     private Seller toSeller(SellerRequest sellerReq) {
         Seller seller = new Seller();
         BeanUtils.copyProperties(sellerReq, seller);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        seller.setPassword(encoder.encode(seller.getPassword()));
         seller.setCreatedDate(new Date());
         seller.setActive(true);
         return seller;
