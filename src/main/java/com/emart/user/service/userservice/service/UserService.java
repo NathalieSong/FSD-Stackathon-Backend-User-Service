@@ -2,6 +2,8 @@ package com.emart.user.service.userservice.service;
 
 import java.util.Date;
 
+import javax.transaction.Transactional;
+
 import com.emart.user.service.userservice.entity.Buyer;
 import com.emart.user.service.userservice.entity.Seller;
 import com.emart.user.service.userservice.exception.EmartException;
@@ -67,7 +69,12 @@ public class UserService {
 		return toSellerResponse(
             sellerRepo.save(toSeller(seller))
         );
-	}
+    }
+    
+    @Transactional
+    public void deleteBuyerByUsername(String username) {
+        buyerRepo.deleteByUsername(username);
+    }
     
     private boolean existBuyer(String username) {
         Buyer buyer = buyerRepo.findByUsername(username);
