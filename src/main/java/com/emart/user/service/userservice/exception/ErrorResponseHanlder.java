@@ -25,7 +25,10 @@ public class ErrorResponseHanlder implements AccessDeniedHandler {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setStatus(HttpStatus.FORBIDDEN.value());
             mapper.writeValue(response.getWriter(),
-              ErrorReponse.of(HttpStatus.FORBIDDEN, "No Permission for this operation", 401));
+              ErrorResponse.of(
+                  HttpStatus.FORBIDDEN,
+                  ExceptionEnums.INSUFFICIENT_AUTH.getMessage(),
+                  ExceptionEnums.INSUFFICIENT_AUTH.getCode()));
         }
     }
 }

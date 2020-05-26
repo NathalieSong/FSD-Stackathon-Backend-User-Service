@@ -2,19 +2,19 @@ package com.emart.user.service.userservice.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class ErrorReponse {
+public class ErrorResponse {
     private final HttpStatus status;
     private final String message;
     private final Integer code;
 
-    protected ErrorReponse(HttpStatus status, final String message, final Integer code) {
+    protected ErrorResponse(HttpStatus status, final String message, final Integer code) {
         this.status = status;
         this.message = message;
         this.code = code;
     }
 
-    public static ErrorReponse of(HttpStatus status, final String message, final Integer code) {
-        return new ErrorReponse(status, message, code);
+    public static ErrorResponse of(HttpStatus status, final String message, final Integer code) {
+        return new ErrorResponse(status, message, code);
     }
 
     public Integer getStatus() {
