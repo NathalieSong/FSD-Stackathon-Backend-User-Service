@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: user-service
+    name: emart-user-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/user_db
@@ -17,6 +17,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: Redis123
 
 jwt:
   secret: emart
@@ -27,4 +32,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://localhost:9999/eureka
