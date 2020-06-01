@@ -42,6 +42,19 @@ public class JwtAuthenticationController {
     @Autowired
     private RedisService redisService;
 
+    @PostMapping("/token")
+    public ResponseEntity<?> getUserByToken(@RequestBody TokenRequest tokenReq) throws EmartException {
+        if (tokenReq.getToken() == null || tokenReq.getToken().isEmpty()) {
+            throw new EmartException(ExceptionEnums.INVALID_TOKEN);
+        }
+        String username = jwtTokenUtil.getUsernameFromToken(tokenReq.getToken());
+        if (username != null) {
+            return new ResponseEntity<>(this.userDetailsService.loadUserByUsername(username), HttpStatus.OK);
+        } else {
+            throw new EmartException(ExceptionEnums.INVALID_TOKEN);
+        }
+    }
+
     @PostMapping("/buyer")
     public ResponseEntity<?> checkBuyerByToken(@RequestBody TokenRequest tokenReq) throws EmartException {
         if (checkRoleByTokenAndRole(tokenReq.getToken(), Roles.BUYER)) {
