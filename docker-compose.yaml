@@ -8,10 +8,12 @@ services:
       - DB_SCHEMA=user_db
       - DB_USERNAME=user_db
       - DB_PASSWORD=User123
+      - REDIS_HOST=127.0.0.1
+      - REDIS_POST=6379
+      - REDIS_PASSWORD=Redis123
       - EUREKA_URL=http://localhost:9999/eureka
     deploy:
       mode: replicated
       replicas: 1
       restart_policy:
         condition: on-failure
-    network_mode: "host"

@@ -6,9 +6,9 @@ spring:
     name: emart-user-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_SERVER}:${DB_PORT}/${DB_SCHEMA}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_SERVER:127.0.0.1}:${DB_PORT:3306}/${DB_SCHEMA:user_db}
+    username: ${DB_USERNAME:user_db}
+    password: ${DB_PASSWORD:User123}
   jpa:
     database: MYSQL
     show-sql: true
@@ -18,10 +18,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57InnoDBDialect
   redis:
-    host: 127.0.0.1
-    port: 6379
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
     database: 0
-    password: Redis123
+    password: ${REDIS_PASSWORD:Redis123}
 
 jwt:
   secret: emart
@@ -32,4 +32,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_URL}
+      defaultZone: ${EUREKA_URL:http://localhost:9999/eureka/}
