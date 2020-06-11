@@ -1,6 +1,6 @@
 version: "3"
 services:
-  china-water-dataexploreapi:
+  emart-user-service:
     image: emart-user-service:latest
     environment:
       - DB_SERVER=127.0.0.1
